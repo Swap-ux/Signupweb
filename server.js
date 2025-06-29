@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 
-// Serve static files from current folder
+
 app.use(express.static(__dirname));
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -69,7 +69,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Serve index.html as fallback
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
