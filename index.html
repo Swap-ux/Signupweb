@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home Page</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+  <header>
+    <a href="/" class="icon">Swap.co</a>
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/">About</a>
+      <a href="/">Collection</a>
+      <a href="/">Contact</a>
+    </div>
+    <div class="Authorisation">
+      <div class="pbox" style="display: none">
+        <div class="Ava">C</div>
+        <div class="dropdown">
+          <a href="#">My Account</a>
+          <a href="#" class="logout">Logout</a>
+        </div>
+      </div>
+      <button type="button" class="login-button">Login</button>
+    </div>
+  </header>
+
+  <section>
+    <h1>Welcome</h1>
+  </section>
+
+  <div class="alert">
+    <div class="alertsucess">
+      <i class='bx bx-check'></i>
+      <span>Alert message</span>
+    </div>
+  </div>
+
+  <div class="main-auth">
+    <button type="button" class="close-button">
+      <i class='bx bxs-x-circle'></i>
+    </button>
+    <div class="fbox">
+      <h2>Login</h2>
+      <form>
+        <div class="ibox">
+          <input type="email" name="email" placeholder="Email" required />
+          <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="ibox">
+          <input type="password" name="password" placeholder="Password" required />
+          <i class='bx bxs-lock'></i>
+        </div>
+        <button type="submit" class="button">Login</button>
+        <p>Don't have an account? <a href="#" class="register">Signup</a></p>
+      </form>
+    </div>
+    <div class="fboxregister">
+      <h2>Signup</h2>
+      <form>
+        <div class="ibox">
+          <input type="text" name="name" placeholder="Name" required />
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="ibox">
+          <input type="email" name="email" placeholder="Email" required />
+          <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="ibox">
+          <input type="password" name="password" placeholder="Password" required />
+          <i class='bx bxs-lock'></i>
+        </div>
+        <button type="submit" class="button">Signup</button>
+        <p>Already have an account? <a href="#" class="login">Login</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

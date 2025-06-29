@@ -1,0 +1,196 @@
+/* File: style.css */
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ─── Header & Navigation ────────────────────────────────────────────────── */
+header {
+  position: fixed; top: 0; left: 0; width: 100%;
+  padding: 20px 100px; display: flex; align-items: center;
+  z-index: 99; backdrop-filter: blur(20px);
+}
+.icon { font-size: 30px; color: white; text-decoration: none; font-weight: 700; margin-right: auto; }
+.nav a { color: white; text-decoration: none; font-weight: 500; margin-left: 40px; }
+.Authorisation { margin-left: 40px; }
+.Authorisation .login-button {
+  height: 40px; padding: 0 35px; background: transparent;
+  border: 2px solid white; border-radius: 40px;
+  font-size: 16px; color: #f7f4f4; font-weight: 500;
+  cursor: pointer; transition: .5s;
+}
+.Authorisation .login-button:hover { background: white; color: black; }
+
+/* ─── Hero Section ───────────────────────────────────────────────────────── */
+section {
+  min-height: 100vh;
+  background: url(Background3.jpg) no-repeat center/cover;
+  padding: 0 100px;
+}
+section h1 {
+  position: absolute; bottom: 40px;
+  font-size: 25px; color: white; font-weight: 600;
+}
+
+/* ─── Auth Modal ────────────────────────────────────────────────────────── */
+.main-auth {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 420px;
+  height: 440px;              /* default height */
+  background: rgba(0,0,0,.3);
+  border: 2px solid rgba(255,255,255,.3);
+  backdrop-filter: blur(20px);
+  color: white;
+  overflow: hidden;
+  transform: scale(0);
+  transition: transform .5s ease, height .2s ease;  /* include height transition */
+}
+
+.main-auth.show {
+  transform: scale(1);
+}
+
+.main-auth.slide {
+  height: 520px;            /* expanded height on slide */
+}
+
+/* Stack both panels exactly */
+.main-auth .fbox,
+.main-auth .fboxregister {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  padding: 40px;
+  transition: transform .3s ease;
+}
+
+/* Login panel in place, register off to right */
+.main-auth .fbox {
+  transform: translateX(0);
+}
+.main-auth .fboxregister {
+  transform: translateX(100%);
+}
+
+/* Slide panels horizontally */
+.main-auth.slide .fbox {
+  transform: translateX(-100%);
+}
+.main-auth.slide .fboxregister {
+  transform: translateX(0);
+}
+
+.fbox h2,
+.fboxregister h2 {
+  font-size: 35px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.ibox {
+  position: relative; width: 100%; height: 50px; margin: 15px 0;
+}
+.ibox input {
+  width: 100%; height: 100%;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,.3);
+  border-radius: 40px;
+  padding: 0 45px 0 20px;
+  font-size: 16px; color: white;
+}
+.ibox input::placeholder { color: white; }
+.ibox i {
+  position: absolute; top: 50%; right: 20px;
+  transform: translateY(-50%); font-size: 20px; color: white;
+}
+
+.button {
+  width: 100%; height: 45px;
+  background: white; color: black;
+  border: none; border-radius: 40px;
+  font-size: 16px; font-weight: 500;
+  margin-top: 20px; cursor: pointer;
+}
+
+.fbox p,
+.fboxregister p {
+  margin-top: 15px; font-size: 14px;
+}
+.fbox p a,
+.fboxregister p a {
+  color: white; text-decoration: none; font-weight: 600;
+}
+.fbox p a:hover,
+.fboxregister p a:hover { text-decoration: underline; }
+
+.main-auth .close-button {
+  position: absolute; top: 0; right: 0;
+  width: 45px; height: 45px;
+  background: white; border: none;
+  border-bottom-left-radius: 20px;
+  font-size: 35px; color: black; cursor: pointer;
+  z-index: 1;
+}
+
+/* ─── Avatar/Profile Box ───────────────────────────────────────────────── */
+.pbox {
+  display: flex; align-items: center; gap: 10px;
+}
+.pbox .Ava {
+  width: 40px; height: 40px; background: #eee8e8;
+  border-radius: 50%; line-height: 40px;
+  text-align: center; font-size: 25px; color: #000;
+  font-weight: 600; cursor: pointer;
+}
+.pbox .dropdown {
+  position: absolute; top: 85px; right: 100px;
+  background: white; padding: 10px; border-radius: 8px;
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transform: translateY(20px);
+  transition: all .5s ease;
+}
+.pbox.show .dropdown {
+  transform: translateY(0);
+  opacity: 1; pointer-events: auto;
+}
+.pbox .dropdown a {
+  padding: 6px 12px; margin: 2px 0;
+  color: black; text-decoration: none; font-weight: 500;
+  border-radius: 4px; transition: background .25s;
+}
+.pbox .dropdown a:hover { background: lightgray; }
+
+/* ─── In‑page Alert ───────────────────────────────────────────────── */
+.alert {
+  position: fixed; top: 35px; left: 50%;
+  transform: translate(-50%, -150%);
+  width: 350px; height: 70px;
+  background: white; border-radius: 6px;
+  padding: 0 15px; z-index: 100; overflow: hidden;
+  transition: transform .5s ease;
+}
+.alert.show { transform: translate(-50%, 0); }
+.alertsucess {
+  display: flex; align-items: center; height: 100%;
+  font-weight: 500; color: black;
+}
+.alertsucess i { font-size: 35px; margin-right: 8px; }
+@keyframes progress { to { width: 0; } }
+.alert::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 5px;
+  background: green; animation: progress 6s linear forwards;
+}
+.alert.error .alertsucess i { color: red; }
+.alert.error .alertsucess span { color: red; }
+.alert.error::after { background: red; }
