@@ -1,12 +1,10 @@
-/* File: style.css */
 
-/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+
 body {
-  background-color: #121212; /* dark background */
-  color: white;              /* visible text */
+  background-color: #121212; 
+  color: white;              
 }
 * {
   margin: 0;
@@ -15,7 +13,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* ─── Header & Navigation ────────────────────────────────────────────────── */
+
 header {
   position: fixed; top: 0; left: 0; width: 100%;
   padding: 20px 100px; display: flex; align-items: center;
@@ -32,7 +30,7 @@ header {
 }
 .Authorisation .login-button:hover { background: white; color: black; }
 
-/* ─── Hero Section ───────────────────────────────────────────────────────── */
+
 section {
   min-height: 100vh;
   background: url("/background3.jpg") no-repeat center/cover;
@@ -43,31 +41,30 @@ section h1 {
   font-size: 25px; color: white; font-weight: 600;
 }
 
-/* ─── Auth Modal ────────────────────────────────────────────────────────── */
+
 .main-auth {
   position: fixed;
   inset: 0;
   margin: auto;
   width: 420px;
-  height: 440px;              /* default height */
+  height: 440px;             
   background: rgba(0,0,0,.3);
   border: 2px solid rgba(255,255,255,.3);
   backdrop-filter: blur(20px);
   color: white;
   overflow: hidden;
   transform: scale(0);
-  transition: transform .5s ease, height .2s ease;  /* include height transition */
-}
+  transition: transform .5s ease, height .2s ease; 
 
 .main-auth.show {
   transform: scale(1);
 }
 
 .main-auth.slide {
-  height: 520px;            /* expanded height on slide */
+  height: 520px;         
 }
 
-/* Stack both panels exactly */
+
 .main-auth .fbox,
 .main-auth .fboxregister {
   position: absolute; top: 0; left: 0;
@@ -76,7 +73,7 @@ section h1 {
   transition: transform .3s ease;
 }
 
-/* Login panel in place, register off to right */
+
 .main-auth .fbox {
   transform: translateX(0);
 }
@@ -84,7 +81,7 @@ section h1 {
   transform: translateX(100%);
 }
 
-/* Slide panels horizontally */
+
 .main-auth.slide .fbox {
   transform: translateX(-100%);
 }
@@ -144,7 +141,7 @@ section h1 {
   z-index: 1;
 }
 
-/* ─── Avatar/Profile Box ───────────────────────────────────────────────── */
+
 .pbox {
   display: flex; align-items: center; gap: 10px;
 }
@@ -173,7 +170,7 @@ section h1 {
 }
 .pbox .dropdown a:hover { background: lightgray; }
 
-/* ─── In‑page Alert ───────────────────────────────────────────────── */
+
 .alert {
   position: fixed; top: 35px; left: 50%;
   transform: translate(-50%, -150%);
