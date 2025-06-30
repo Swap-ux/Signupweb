@@ -65,7 +65,7 @@ header {
 section {
   min-height: 100vh;
 
-  background: url("/background3.jpg") no-repeat center/cover;
+ background: url("/background3.png") no-repeat center/cover;
 
   padding: 0 100px;
 }
