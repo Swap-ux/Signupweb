@@ -77,7 +77,7 @@ header .login-button {
   box-sizing: border-box;
 
 
-  /* restore blur + translucent background */
+  
   background: rgba(0, 0, 0, 0.3) !important;
   border: 2px solid rgba(255, 255, 255, 0.3) !important;
   backdrop-filter: blur(20px) !important;
@@ -86,7 +86,7 @@ header .login-button {
   border-radius: 8px !important;
   z-index: 1000 !important;
   transition: transform .5s ease, height .2s ease;
-  /* include height transition */
+
 }
 .main-auth.slide {
   height: 40vh;
@@ -171,7 +171,6 @@ header .login-button {
   color: white;
 }
 
-/* — Shrink headings & text — */
 .main-auth h2 {
   font-size: 1.4rem !important;
   margin-bottom: 0.75rem !important;
@@ -199,14 +198,13 @@ header .login-button {
   cursor: pointer;
 }
 
-/* — Ensure touch targets aren’t too small — */
 button,
 input {
   min-height: 2.5rem !important;
   border-radius: 4px !important;
 }
 
-/* — Slightly smaller base font — */
+
 body {
   font-size: 0.95rem !important;
 }
