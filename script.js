@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Check token on load
   const token     = localStorage.getItem('token');
   const userName  = localStorage.getItem('userName');
   if (token && userName) updateUIForLogin(userName);
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateUIForLogin(null);
   });
 
-
+  // Modal controls
   loginBtn.addEventListener('click', () => mainAuth.classList.add('show'));
   closeBtn.addEventListener('click', () =>
     mainAuth.classList.remove('show', 'slide')
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   registerLink.addEventListener('click', () => mainAuth.classList.add('slide'));
   loginLink.addEventListener('click', () => mainAuth.classList.remove('slide'));
 
-
+  // Registration
   const registerForm = document.querySelector('.fboxregister form');
   registerForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
- 
+  // Login
   const loginForm = document.querySelector('.fbox form');
   loginForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -111,3 +112,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
