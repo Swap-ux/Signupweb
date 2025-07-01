@@ -1,16 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const mainAuth     = document.querySelector('.main-auth');
-  const loginBtn     = document.querySelector('.login-button');
-  const closeBtn     = document.querySelector('.close-button');
+  const mainAuth = document.querySelector('.main-auth');
+  const loginBtn = document.querySelector('.login-button');
+  const closeBtn = document.querySelector('.close-button');
   const registerLink = document.querySelector('.register');
-  const loginLink    = document.querySelector('.login');
-  const profileBox   = document.querySelector('.pbox');
-  const avatar       = document.querySelector('.Ava');
-  const logoutLink   = document.querySelector('.logout');
-  const alertBox     = document.querySelector('.alert');
-  const alertIcon    = alertBox.querySelector('i');
-  const alertText    = alertBox.querySelector('span');
+  const loginLink = document.querySelector('.login');
+  const profileBox = document.querySelector('.pbox');
+  const avatar = document.querySelector('.Ava');
+  const logoutLink = document.querySelector('.logout');
+  const alertBox = document.querySelector('.alert');
+  const alertIcon = alertBox.querySelector('i');
+  const alertText = alertBox.querySelector('span');
+  const homeLink    = document.querySelector('header .nav a[href="/"]');
+  const mainContent = document.getElementById('main-content');
   clearAuthForm();
+
+  homeLink.addEventListener('click', e => {
+  e.preventDefault();
+ 
+  mainContent.innerHTML = '';
+ 
+  const img = document.createElement('img');
+  img.src       = ''      
+  img.alt       = 'Home';
+  img.className = 'home-image';
+  mainContent.appendChild(img);
+ 
+  requestAnimationFrame(() => img.classList.add('visible'));
+});
 
   function clearAuthForm() {
     document.querySelectorAll(".main-auth input").forEach(input => input.value = "");
@@ -27,16 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateUIForLogin(userName) {
     if (userName) {
       loginBtn.style.display = 'none';
-      avatar.textContent     = userName.charAt(0).toUpperCase();
+      avatar.textContent = userName.charAt(0).toUpperCase();
       profileBox.style.display = 'flex';
     } else {
-      loginBtn.style.display   = '';
+      loginBtn.style.display = '';
       profileBox.style.display = 'none';
     }
   }
 
-  const token     = localStorage.getItem('token');
-  const userName  = localStorage.getItem('userName');
+
+  const token = localStorage.getItem('token');
+  const userName = localStorage.getItem('userName');
   if (token && userName) updateUIForLogin(userName);
 
   avatar.addEventListener('click', () => {
@@ -51,12 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     clearAuthForm(); 
   });
 
+
   loginBtn.addEventListener('click', () => mainAuth.classList.add('show'));
   closeBtn.addEventListener('click', () =>
     mainAuth.classList.remove('show', 'slide')
   );
   registerLink.addEventListener('click', () => mainAuth.classList.add('slide'));
   loginLink.addEventListener('click', () => mainAuth.classList.remove('slide'));
+
 
   const registerForm = document.querySelector('.fboxregister form');
   registerForm.addEventListener('submit', async e => {
@@ -67,8 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:     name.value.trim(),
-          email:    email.value.trim(),
+          name: name.value.trim(),
+          email: email.value.trim(),
           password: password.value
         })
       });
@@ -94,14 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email:    email.value.trim(),
+          email: email.value.trim(),
           password: password.value
         })
       });
       const data = await res.json();
       if (res.ok) {
         triggerAlert('Login successful!', 'success');
- 
+       
         localStorage.setItem('token', data.token);
         localStorage.setItem('userName', data.name);
         updateUIForLogin(data.name);
@@ -114,3 +133,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
