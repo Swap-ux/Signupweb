@@ -83,7 +83,7 @@ section h1 {
   margin: auto;
   width: 420px;
   height: 440px;
-  /* default height */
+ 
   background: rgba(0, 0, 0, .3);
   border: 2px solid rgba(255, 255, 255, .3);
   backdrop-filter: blur(20px);
@@ -91,7 +91,7 @@ section h1 {
   overflow: hidden;
   transform: scale(0);
   transition: transform .5s ease, height .2s ease;
-  /* include height transition */
+
 }
 
 .main-auth.show {
