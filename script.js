@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   const mainAuth     = document.querySelector('.main-auth');
   const loginBtn     = document.querySelector('.login-button');
@@ -11,6 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const alertBox     = document.querySelector('.alert');
   const alertIcon    = alertBox.querySelector('i');
   const alertText    = alertBox.querySelector('span');
+  clearAuthForm();
+
+  function clearAuthForm() {
+    document.querySelectorAll(".main-auth input").forEach(input => input.value = "");
+  }
 
   function triggerAlert(message, type) {
     alertBox.classList.remove('success', 'error', 'show');
@@ -31,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
   const token     = localStorage.getItem('token');
   const userName  = localStorage.getItem('userName');
   if (token && userName) updateUIForLogin(userName);
@@ -45,8 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
     updateUIForLogin(null);
+    clearAuthForm(); 
   });
-
 
   loginBtn.addEventListener('click', () => mainAuth.classList.add('show'));
   closeBtn.addEventListener('click', () =>
@@ -98,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await res.json();
       if (res.ok) {
         triggerAlert('Login successful!', 'success');
-        
+ 
         localStorage.setItem('token', data.token);
         localStorage.setItem('userName', data.name);
         updateUIForLogin(data.name);
@@ -111,4 +114,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
