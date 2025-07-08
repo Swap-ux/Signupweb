@@ -10,6 +10,7 @@ const bcrypt    = require('bcrypt');
 const app = express();
 
 
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
@@ -100,6 +101,9 @@ app.get('/api/dashboard', authenticate, (req, res) => {
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+const HOST = '0.0.0.0'; // 👈 REQUIRED on Render
 
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 Server running at http://${HOST}:${PORT}`);
+});
 
