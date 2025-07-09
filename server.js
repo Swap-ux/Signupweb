@@ -1,26 +1,24 @@
 
-const jwt       = require('jsonwebtoken');
+const jwt      = require('jsonwebtoken');
 require('dotenv').config();
 
-const path      = require('path');
-const express   = require('express');
-const mongoose  = require('mongoose');
-const bcrypt    = require('bcrypt');
+const path     = require('path');
+const express  = require('express');
+const mongoose = require('mongoose');
+const bcrypt   = require('bcrypt');
 
 const app = express();
-
-
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser:    true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('✔️ MongoDB connected'))
-.catch(err => console.error('❌ MongoDB error:', err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('✔️ MongoDB connected'))
+  .catch(err => {
+    console.error('❌ MongoDB error:', err);
+    process.exit(1);
+  });
 
 
 const userSchema = new mongoose.Schema({
@@ -30,20 +28,15 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
-
 function authenticate(req, res, next) {
-  const authHeader = req.headers.authorization || '';
-  const token = authHeader.replace('Bearer ', '');
-  if (!token) {
-    return res.status(401).json({ message: 'No token provided.' });
-  }
+  const token = (req.headers.authorization || '').replace('Bearer ', '');
+  if (!token) return res.status(401).json({ message: 'No token provided.' });
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = payload; 
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
-  } catch (err) {
-    return res.status(401).json({ message: 'Invalid or expired token.' });
+  } catch {
+    res.status(401).json({ message: 'Invalid or expired token.' });
   }
 }
 
@@ -53,44 +46,29 @@ app.post('/api/register', async (req, res) => {
     const { name, email, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hash });
-    return res.status(201).json({ message: 'Registered!', userId: user._id });
+    res.status(201).json({ message: 'Registered!', userId: user._id });
   } catch (err) {
-    if (err.code === 11000) {
-      
-      return res.status(400).json({ error: 'Email already used.' });
-    }
-    return res.status(400).json({ error: err.message });
+    if (err.code === 11000) res.status(400).json({ error: 'Email already used.' });
+    else res.status(400).json({ error: err.message });
   }
 });
 
-
 app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
   try {
+    const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password.' });
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
+    if (!user || !await bcrypt.compare(password, user.password)) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
-   
     const token = jwt.sign(
       { userId: user._id, name: user.name },
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-
-    return res.status(200).json({
-      message: 'Login successful!',
-      token,            
-      userId: user._id,
-      name: user.name
-    });
+    res.json({ message: 'Login successful!', token, userId: user._id, name: user.name });
   } catch (err) {
-    return res.status(500).json({ message: 'Login error', error: err.message });
+    res.status(500).json({ message: 'Login error', error: err.message });
   }
 });
 
@@ -101,9 +79,8 @@ app.get('/api/dashboard', authenticate, (req, res) => {
 
 
 const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0'; 
+const HOST = '0.0.0.0';
 
 app.listen(PORT, HOST, () => {
   console.log(`🚀 Server running at http://${HOST}:${PORT}`);
 });
-
