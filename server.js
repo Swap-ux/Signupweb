@@ -9,15 +9,23 @@ const bcrypt   = require('bcrypt');
 
 const app = express();
 
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
+
+
+const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 Server running at http://${HOST}:${PORT}`);
+});
 
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✔️ MongoDB connected'))
   .catch(err => {
     console.error('❌ MongoDB error:', err);
-    process.exit(1);
+  
   });
 
 
@@ -28,10 +36,10 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
+
 function authenticate(req, res, next) {
   const token = (req.headers.authorization || '').replace('Bearer ', '');
   if (!token) return res.status(401).json({ message: 'No token provided.' });
-
   try {
     req.user = jwt.verify(token, process.env.JWT_SECRET);
     next();
@@ -39,7 +47,6 @@ function authenticate(req, res, next) {
     res.status(401).json({ message: 'Invalid or expired token.' });
   }
 }
-
 
 app.post('/api/register', async (req, res) => {
   try {
@@ -60,7 +67,6 @@ app.post('/api/login', async (req, res) => {
     if (!user || !await bcrypt.compare(password, user.password)) {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
-
     const token = jwt.sign(
       { userId: user._id, name: user.name },
       process.env.JWT_SECRET,
@@ -72,15 +78,6 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
 app.get('/api/dashboard', authenticate, (req, res) => {
   res.json({ message: `Welcome back, ${req.user.name}!` });
-});
-
-
-const PORT = process.env.PORT || 3000;
-const HOST = '0.0.0.0';
-
-app.listen(PORT, HOST, () => {
-  console.log(`🚀 Server running at http://${HOST}:${PORT}`);
 });
