@@ -16,16 +16,22 @@ app.use(express.static(path.join(__dirname)));
 
 const PORT = process.env.PORT || 3000;
 const HOST = '0.0.0.0';
-app.listen(PORT, HOST, () => {
+
+
+const server = app.listen(PORT, HOST, () => {
   console.log(`🚀 Server running at http://${HOST}:${PORT}`);
 });
+
+
+server.keepAliveTimeout = 120000;   
+server.headersTimeout   = 120000;  
 
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✔️ MongoDB connected'))
   .catch(err => {
     console.error('❌ MongoDB error:', err);
-  
+   
   });
 
 
@@ -48,17 +54,19 @@ function authenticate(req, res, next) {
   }
 }
 
+
 app.post('/api/register', async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const hash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, password: hash });
-    res.status(201).json({ message: 'Registered!', userId: user._id });
+    res.status(201).json({ message: 'Registered!', userId: user._1 });
   } catch (err) {
     if (err.code === 11000) res.status(400).json({ error: 'Email already used.' });
     else res.status(400).json({ error: err.message });
   }
 });
+
 
 app.post('/api/login', async (req, res) => {
   try {
@@ -77,6 +85,7 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ message: 'Login error', error: err.message });
   }
 });
+
 
 app.get('/api/dashboard', authenticate, (req, res) => {
   res.json({ message: `Welcome back, ${req.user.name}!` });
