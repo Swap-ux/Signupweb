@@ -95,7 +95,7 @@ section h1 {
 }
 
 .main-auth.forgot {
-  height: 440px; /* Adjust height if needed for forgot form */
+  height: 440px; 
 }
 
 .main-auth .fbox,
@@ -341,9 +341,9 @@ section h1 {
   background: red;
 }
 
-/* Add these styles to your existing style.css */
 
-/* Reset password form positioning */
+
+
 .main-auth .fboxforgot,
 .main-auth .fboxreset {
   position: absolute;
@@ -356,7 +356,7 @@ section h1 {
   transform: translateX(100%);
 }
 
-/* Show forgot password form */
+
 .main-auth.forgot .fbox {
   transform: translateX(-100%);
 }
@@ -373,7 +373,7 @@ section h1 {
   transform: translateX(100%);
 }
 
-/* Show reset password form */
+
 .main-auth.reset .fbox,
 .main-auth.reset .fboxregister,
 .main-auth.reset .fboxforgot {
@@ -384,7 +384,7 @@ section h1 {
   transform: translateX(0);
 }
 
-/* Password strength indicator */
+
 .password-strength {
   margin-top: 5px;
   font-size: 12px;
@@ -403,7 +403,7 @@ section h1 {
   color: #28a745;
 }
 
-/* Loading state for buttons */
+
 .button.loading {
   opacity: 0.7;
   cursor: not-allowed;
@@ -427,7 +427,7 @@ section h1 {
   100% { transform: rotate(360deg); }
 }
 
-/* Email sent confirmation */
+
 .email-sent {
   text-align: center;
   padding: 20px;
