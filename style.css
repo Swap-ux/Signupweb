@@ -1,14 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
 
 header {
   position: fixed;
@@ -59,12 +57,9 @@ header {
   color: black;
 }
 
-
 section {
   min-height: 100vh;
-
   background: url("/background3.png") no-repeat center/cover;
-
   padding: 0 100px;
 }
 
@@ -76,14 +71,12 @@ section h1 {
   font-weight: 600;
 }
 
-
 .main-auth {
   position: fixed;
   inset: 0;
   margin: auto;
   width: 420px;
   height: 440px;
- 
   background: rgba(0, 0, 0, .3);
   border: 2px solid rgba(255, 255, 255, .3);
   backdrop-filter: blur(20px);
@@ -91,7 +84,6 @@ section h1 {
   overflow: hidden;
   transform: scale(0);
   transition: transform .5s ease, height .2s ease;
-
 }
 
 .main-auth.show {
@@ -100,12 +92,15 @@ section h1 {
 
 .main-auth.slide {
   height: 520px;
- 
 }
 
+.main-auth.forgot {
+  height: 440px; /* Adjust height if needed for forgot form */
+}
 
 .main-auth .fbox,
-.main-auth .fboxregister {
+.main-auth .fboxregister,
+.main-auth .fboxforgot {
   position: absolute;
   top: 0;
   left: 0;
@@ -115,7 +110,6 @@ section h1 {
   transition: transform .3s ease;
 }
 
-
 .main-auth .fbox {
   transform: translateX(0);
 }
@@ -124,6 +118,9 @@ section h1 {
   transform: translateX(100%);
 }
 
+.main-auth .fboxforgot {
+  transform: translateX(100%);
+}
 
 .main-auth.slide .fbox {
   transform: translateX(-100%);
@@ -133,8 +130,17 @@ section h1 {
   transform: translateX(0);
 }
 
+.main-auth.forgot .fbox {
+  transform: translateX(-100%);
+}
+
+.main-auth.forgot .fboxforgot {
+  transform: translateX(0);
+}
+
 .fbox h2,
-.fboxregister h2 {
+.fboxregister h2,
+.fboxforgot h2 {
   font-size: 35px;
   margin-bottom: 20px;
   text-align: center;
@@ -185,20 +191,23 @@ section h1 {
 }
 
 .fbox p,
-.fboxregister p {
+.fboxregister p,
+.fboxforgot p {
   margin-top: 15px;
   font-size: 14px;
 }
 
 .fbox p a,
-.fboxregister p a {
+.fboxregister p a,
+.fboxforgot p a {
   color: white;
   text-decoration: none;
   font-weight: 600;
 }
 
 .fbox p a:hover,
-.fboxregister p a:hover {
+.fboxregister p a:hover,
+.fboxforgot p a:hover {
   text-decoration: underline;
 }
 
@@ -271,7 +280,6 @@ section h1 {
   background: lightgray;
 }
 
-
 .alert {
   position: fixed;
   top: 35px;
@@ -333,4 +341,100 @@ section h1 {
   background: red;
 }
 
+/* Add these styles to your existing style.css */
 
+/* Reset password form positioning */
+.main-auth .fboxforgot,
+.main-auth .fboxreset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  transition: transform .3s ease;
+  transform: translateX(100%);
+}
+
+/* Show forgot password form */
+.main-auth.forgot .fbox {
+  transform: translateX(-100%);
+}
+
+.main-auth.forgot .fboxforgot {
+  transform: translateX(0);
+}
+
+.main-auth.forgot .fboxregister {
+  transform: translateX(100%);
+}
+
+.main-auth.forgot .fboxreset {
+  transform: translateX(100%);
+}
+
+/* Show reset password form */
+.main-auth.reset .fbox,
+.main-auth.reset .fboxregister,
+.main-auth.reset .fboxforgot {
+  transform: translateX(-100%);
+}
+
+.main-auth.reset .fboxreset {
+  transform: translateX(0);
+}
+
+/* Password strength indicator */
+.password-strength {
+  margin-top: 5px;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.password-strength.weak {
+  color: #dc3545;
+}
+
+.password-strength.medium {
+  color: #ffc107;
+}
+
+.password-strength.strong {
+  color: #28a745;
+}
+
+/* Loading state for buttons */
+.button.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.button.loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Email sent confirmation */
+.email-sent {
+  text-align: center;
+  padding: 20px;
+  color: #28a745;
+}
+
+.email-sent i {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
