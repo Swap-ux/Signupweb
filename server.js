@@ -85,7 +85,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// UPDATED: Forgot Password Route with new email template
+
 app.post('/api/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
@@ -93,11 +93,11 @@ app.post('/api/forgot-password', async (req, res) => {
 
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
-        // To prevent user enumeration, send a generic success message even if the user is not found.
+        
         return res.json({ message: 'If an account with that email exists, a password reset link has been sent.' });
     }
 
-    // Generate reset token
+  
     const resetToken = crypto.randomBytes(32).toString('hex');
     user.resetToken = resetToken;
     user.resetTokenExp = Date.now() + 3600000; 
@@ -121,7 +121,7 @@ app.post('/api/forgot-password', async (req, res) => {
     `;
     
 
-    // Send email
+    
     await transporter.sendMail({
       to: user.email,
       from: `"Swap.co Team" <${process.env.EMAIL_USER}>`,
