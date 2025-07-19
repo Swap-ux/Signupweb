@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   clearAuthForm();
   
-  // Check for reset token in URL
+  
   const urlParams = new URLSearchParams(window.location.search);
   const resetToken = urlParams.get('token');
   
@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     verifyResetToken(resetToken);
   }
 
-  // Home navigation
   homeLinks.forEach(homeLink => {
     homeLink.addEventListener('click', e => {
       e.preventDefault();
@@ -78,12 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Check for existing session
   const token = localStorage.getItem('token');
   const userName = localStorage.getItem('userName');
   if (token && userName) updateUIForLogin(userName);
 
-  // Event listeners
+
   document.addEventListener('click', (e) => {
     if (!profileBox.contains(e.target)) {
       profileBox.classList.remove('show');
@@ -104,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     triggerAlert('Logged out successfully!', 'success');
   });
 
-  // Modal controls
+
   loginBtn.addEventListener('click', () => {
     mainAuth.classList.add('show');
     mainAuth.classList.remove('slide', 'forgot', 'reset');
@@ -124,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mainAuth.classList.remove('slide', 'forgot', 'reset');
   });
   
-  // 🆕 NEW: Password reset navigation
+ 
   forgotPasswordLink.addEventListener('click', (e) => {
     e.preventDefault();
     mainAuth.classList.add('forgot');
@@ -136,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mainAuth.classList.remove('forgot', 'reset', 'slide');
   });
 
-  // Close modal when clicking outside
   mainAuth.addEventListener('click', (e) => {
     if (e.target === mainAuth) {
       mainAuth.classList.remove('show', 'slide', 'forgot', 'reset');
@@ -144,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Registration form
+
   const registerForm = document.querySelector('.fboxregister form');
   registerForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -193,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Login form
+ 
   const loginForm = document.querySelector('.fbox form');
   loginForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -237,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 🆕 NEW: Forgot Password Form
+ 
   const forgotForm = document.querySelector('.fboxforgot form');
   forgotForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -277,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 🆕 NEW: Reset Password Form
+
   const resetForm = document.querySelector('.fboxreset form');
   resetForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -331,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 🆕 NEW: Verify Reset Token
+
   async function verifyResetToken(token) {
     try {
       const res = await fetch(`/api/reset-password/${token}`);
