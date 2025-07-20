@@ -89,5 +89,12 @@ app.post('/api/forgot-password', async (req, res) => {
 
 
 
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+const HOST = '0.0.0.0';
+
+
+const server = app.listen(PORT, HOST, () => {
+  console.log(`🚀 Server running at http://${HOST}:${PORT}`);
+});
+
