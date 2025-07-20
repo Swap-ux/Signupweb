@@ -5,9 +5,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
-const sgMail = require('@sendgrid/mail'); // Using SendGrid
+const sgMail = require('@sendgrid/mail');
 
-// Configure SendGrid with your API Key
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const app = express();
@@ -80,7 +80,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// UPDATED: Forgot Password Route using SendGrid
+
 app.post('/api/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
@@ -114,15 +114,13 @@ app.post('/api/forgot-password', async (req, res) => {
       </body>
     `;
 
-    // Create the SendGrid message object
     const msg = {
       to: user.email,
-      from: 'your.verified.email@example.com', // ❗️ IMPORTANT: Change this to your verified sender email
+      from: 'Swapnildeka14@gmail.com',
       subject: 'Password Reset Request',
       html: emailHTML,
     };
 
-    // Send the email with SendGrid (runs in the background)
     sgMail.send(msg);
 
     console.log(`Reset link sent via SendGrid: ${resetURL}`);
