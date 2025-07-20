@@ -80,16 +80,17 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
 app.post('/api/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) return res.status(400).json({ error: 'Email is required.' });
-
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
+    
       return res.json({ message: 'If an account with that email exists, a password reset link has been sent.' });
     }
+
+   
 
     const resetToken = crypto.randomBytes(32).toString('hex');
     user.resetToken = resetToken;
