@@ -72,7 +72,7 @@ app.post('/api/forgot-password', async (req, res) => {
   
     const msg = {
       to: user.email,
-      from: 'YOUR_VERIFIED_SENDER_EMAIL@example.com', // ❗️ IMPORTANT: Change this to the email you verified with SendGrid
+      from: 'Swapnildeka14@gmail.com',
       subject: 'Password Reset Request',
       html: emailHTML,
     };
