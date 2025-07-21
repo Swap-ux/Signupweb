@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await res.json();
       
       if (res.ok) {
-        triggerAlert('Password reset email sent! Check your inbox.', 'success');
+        triggerAlert('If email exist Password reset email sent! Check your inbox. (check your spam if not received)', 'success');
         forgotForm.reset();
         setTimeout(() => {
           mainAuth.classList.remove('show', 'forgot');
