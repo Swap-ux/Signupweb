@@ -29,19 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     homeLink.addEventListener('click', e => {
       e.preventDefault();
       
-      if (mainContent) {
-        mainContent.innerHTML = '';
-        
-        const img = document.createElement('img');
-        img.src = '/background3.png';
-        img.alt = 'Home';
-        img.className = 'home-image';
-        mainContent.appendChild(img);
-        
-        requestAnimationFrame(() => img.classList.add('visible'));
-      }
-    });
-  });
+
 
   function clearAuthForm() {
     document.querySelectorAll(".main-auth input").forEach(input => input.value = "");
