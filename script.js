@@ -24,13 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (resetToken) {
     verifyResetToken(resetToken);
   }
-
-  homeLinks.forEach(homeLink => {
-    homeLink.addEventListener('click', e => {
-      e.preventDefault();
-      
-
-
   function clearAuthForm() {
     document.querySelectorAll(".main-auth input").forEach(input => input.value = "");
   }
